@@ -122,3 +122,154 @@ Before applying the Naive Bayes algorithm, several preprocessing steps were perf
 
 After preprocessing, the dataset can be used to train a **Naive Bayes classifier** that predicts whether a message is spam or ham.
 print("Accuracy:", accuracy)
+
+
+# Naive Bayes SMS Spam Classification
+
+## Overview
+
+Project ini mengimplementasikan algoritma **Naive Bayes** untuk melakukan klasifikasi pesan SMS menjadi dua kategori:
+
+* **Ham** → pesan normal (bukan spam)
+* **Spam** → pesan yang berisi promosi, penipuan, atau iklan tidak diinginkan
+
+Model dilatih menggunakan dataset **SMS Spam Collection** dan dievaluasi menggunakan beberapa metrik evaluasi, salah satunya adalah **Confusion Matrix**.
+
+---
+
+# Confusion Matrix
+
+Confusion Matrix adalah tabel evaluasi yang digunakan untuk melihat performa model klasifikasi dengan membandingkan **prediksi model** dengan **label sebenarnya**.
+
+Struktur Confusion Matrix untuk klasifikasi biner adalah sebagai berikut:
+
+| Actual / Predicted | Ham                 | Spam                |
+| ------------------ | ------------------- | ------------------- |
+| **Ham**            | True Negative (TN)  | False Positive (FP) |
+| **Spam**           | False Negative (FN) | True Positive (TP)  |
+
+---
+
+# Penjelasan Setiap Komponen
+
+### 1. True Positive (TP)
+
+Model memprediksi **Spam**, dan pesan tersebut memang **Spam**.
+
+Contoh:
+Pesan promosi seperti:
+
+```
+Congratulations! You won a free ticket. Click here to claim.
+```
+
+Model berhasil mengenali pesan tersebut sebagai spam.
+
+---
+
+### 2. True Negative (TN)
+
+Model memprediksi **Ham**, dan pesan tersebut memang **bukan spam**.
+
+Contoh:
+
+```
+Hey, are we still meeting tonight?
+```
+
+Model berhasil mengklasifikasikan pesan normal dengan benar.
+
+---
+
+### 3. False Positive (FP)
+
+Model memprediksi **Spam**, tetapi pesan sebenarnya **Ham**.
+
+Contoh:
+
+```
+Don't forget to bring the documents tomorrow.
+```
+
+Pesan normal dianggap spam oleh model.
+Kesalahan ini disebut juga **Type I Error**.
+
+---
+
+### 4. False Negative (FN)
+
+Model memprediksi **Ham**, tetapi pesan sebenarnya **Spam**.
+
+Contoh:
+
+```
+Win a brand new phone now! Limited offer!
+```
+
+Pesan spam tidak terdeteksi oleh model.
+Kesalahan ini disebut **Type II Error**.
+
+---
+
+# Visualisasi Confusion Matrix
+
+Confusion Matrix divisualisasikan menggunakan heatmap untuk mempermudah interpretasi.
+
+```python
+conf_matrix = confusion_matrix(y_test, y_pred)
+
+sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues',
+            xticklabels=['Ham','Spam'],
+            yticklabels=['Ham','Spam'])
+```
+
+Penjelasan visualisasi:
+
+* Sumbu **X** → Predicted Label (hasil prediksi model)
+* Sumbu **Y** → Actual Label (label sebenarnya)
+* Angka pada setiap sel menunjukkan jumlah data pada kategori tersebut.
+
+---
+
+# Model Performance
+
+Model Naive Bayes pada proyek ini menghasilkan:
+
+* **Accuracy : 95.61%**
+
+Artinya sekitar **95% pesan berhasil diklasifikasikan dengan benar** oleh model.
+
+---
+
+# Kesimpulan
+
+Berdasarkan Confusion Matrix dan nilai akurasi, model **Naive Bayes** mampu melakukan klasifikasi SMS spam dengan performa yang sangat baik.
+
+Namun masih terdapat kemungkinan kesalahan klasifikasi seperti:
+
+* **False Positive** → pesan normal dianggap spam
+* **False Negative** → pesan spam tidak terdeteksi
+
+Evaluasi ini penting untuk memahami kelemahan model dan melakukan perbaikan di tahap selanjutnya.
+
+---
+
+# Tools & Libraries
+
+Project ini menggunakan beberapa library Python berikut:
+
+* pandas
+* numpy
+* scikit-learn
+* seaborn
+* matplotlib
+
+---
+
+# Dataset
+
+Dataset yang digunakan adalah:
+
+**SMS Spam Collection Dataset**
+
+Dataset ini berisi ribuan pesan SMS yang telah dilabeli sebagai **spam** atau **ham** untuk keperluan klasifikasi teks.
