@@ -124,19 +124,6 @@ After preprocessing, the dataset can be used to train a **Naive Bayes classifier
 print("Accuracy:", accuracy)
 
 
-# Naive Bayes SMS Spam Classification
-
-## Overview
-
-Project ini mengimplementasikan algoritma **Naive Bayes** untuk melakukan klasifikasi pesan SMS menjadi dua kategori:
-
-* **Ham** → pesan normal (bukan spam)
-* **Spam** → pesan yang berisi promosi, penipuan, atau iklan tidak diinginkan
-
-Model dilatih menggunakan dataset **SMS Spam Collection** dan dievaluasi menggunakan beberapa metrik evaluasi, salah satunya adalah **Confusion Matrix**.
-
----
-
 # Confusion Matrix
 
 Confusion Matrix adalah tabel evaluasi yang digunakan untuk melihat performa model klasifikasi dengan membandingkan **prediksi model** dengan **label sebenarnya**.
@@ -254,22 +241,4 @@ Evaluasi ini penting untuk memahami kelemahan model dan melakukan perbaikan di t
 
 ---
 
-# Tools & Libraries
 
-Project ini menggunakan beberapa library Python berikut:
-
-* pandas
-* numpy
-* scikit-learn
-* seaborn
-* matplotlib
-
----
-
-# Dataset
-
-Dataset yang digunakan adalah:
-
-**SMS Spam Collection Dataset**
-
-Dataset ini berisi ribuan pesan SMS yang telah dilabeli sebagai **spam** atau **ham** untuk keperluan klasifikasi teks.
