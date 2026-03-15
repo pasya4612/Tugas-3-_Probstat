@@ -38,81 +38,87 @@ Because of the *independence assumption*, Naive Bayes becomes computationally ef
 
 ---
 
-# 3. Dataset Used
+## 3. Dataset Used
 
-Dataset used in this project: *Online Retail Dataset*
+The dataset used in this project is the **SMS Spam Collection Dataset**, available on Kaggle:
 
-Dataset Source:  
-https://archive.ics.uci.edu/dataset/352/online+retail
+https://www.kaggle.com/datasets/uciml/sms-spam-collection-dataset
 
-Dataset description:
+### Dataset Overview
 
-The Online Retail dataset contains transactions occurring between 2010 and 2011 for a UK-based online retail store.
+The **SMS Spam Collection Dataset** is a public dataset containing **5,572 SMS messages in English**.  
+Each message is labeled as either **spam** or **ham (legitimate message)**.
 
-Important attributes include:
-
-- InvoiceNo
-- StockCode
-- Description
-- Quantity
-- InvoiceDate
-- UnitPrice
-- CustomerID
-- Country
-
-For this project, the dataset was processed and used to classify purchasing behavior.
-
-Example of dataset:
-
-| Quantity | UnitPrice | Country | Label |
-|---------|----------|--------|------|
-| 6 | 2.55 | UK | Normal |
-| 48 | 0.85 | UK | Bulk |
-| 2 | 5.95 | France | Normal |
+This dataset is widely used in **Natural Language Processing (NLP)** and **text classification tasks**, particularly for building machine learning models that detect spam messages.
 
 ---
 
-# 4. Implementation
+### Dataset Structure
 
-The Naive Bayes algorithm was implemented using *Python* with the *Scikit-learn* library.
+The dataset consists of **two main columns**:
 
-Main steps:
+| Column | Description |
+|------|-------------|
+| v1 | Label of the message (`spam` or `ham`) |
+| v2 | The SMS message text |
 
-1. Load dataset
-2. Data preprocessing
-3. Train-test split
-4. Model training
-5. Prediction
-6. Model evaluation
+Each row represents one SMS message.
 
-Example code:
+---
 
-```python
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import GaussianNB
-from sklearn.metrics import accuracy_score
+### Example Data
 
-# Load dataset
-data = pd.read_csv("dataset.csv")
+| v1 | v2 |
+|----|----|
+| ham | Go until jurong point crazy.. Available only in Bugis n great world |
+| spam | Free entry in 2 a wkly comp to win FA Cup final tkts |
+| ham | Ok lar... Joking wif u oni |
 
-# Features and label
-X = data[['Quantity','UnitPrice']]
-y = data['Label']
+- **ham** represents legitimate messages.
+- **spam** represents unwanted promotional or scam messages.
 
-# Split dataset
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
-)
+---
 
-# Model
-model = GaussianNB()
-model.fit(X_train, y_train)
+### Dataset Size
 
-# Prediction
-pred = model.predict(X_test)
+- Total messages: **5,572**
+- Total columns: **2**
+- File format: **CSV / TXT**
 
-# Accuracy
-accuracy = accuracy_score(y_test, pred)
+---
 
+### Class Distribution
+
+The dataset is **imbalanced**, meaning legitimate messages appear more frequently than spam messages.
+
+| Class | Count |
+|------|------|
+| Ham | 4,825 |
+| Spam | 747 |
+
+This means approximately:
+
+- **86% Ham**
+- **14% Spam**
+
+---
+
+### Data Preprocessing
+
+Before applying the Naive Bayes algorithm, several preprocessing steps were performed:
+
+1. **Text Cleaning**
+   - Convert text to lowercase
+   - Remove punctuation and special characters
+
+2. **Tokenization**
+   - Split text messages into individual words.
+
+3. **Stopword Removal**
+   - Remove common words such as *the, is, and*.
+
+4. **Feature Extraction**
+   - Convert text into numerical form using **Bag of Words** or **TF-IDF**.
+
+After preprocessing, the dataset can be used to train a **Naive Bayes classifier** that predicts whether a message is spam or ham.
 print("Accuracy:", accuracy)
